@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nuunito_bold"
+                android:text="ID Transaksi : "
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_id_transaksi_detail_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="idtransaksi"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nuunito_reguler"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"/>
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nuunito_bold"
+                android:text="Nama Pemilik : "
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_nama_pemilik_detail_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="namapemilik"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nuunito_reguler"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#F5F5F5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nuunito_bold"
+                android:text="No HP : "
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_nohp_detail_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0000000"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nuunito_reguler"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#F5F5F5" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nuunito_bold"
+                android:text="Alamat Vendor : "
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_alamat_detail_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alamatvendor"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nuunito_reguler"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#F5F5F5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nuunito_bold"
+                android:text="Nama Toko : "
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_nama_toko_detail_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="namatoko"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nuunito_reguler"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="7dp"
+    android:layout_margin="7dp"
+    app:cardBackgroundColor="@color/colorPrimaryApp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_nama_toko_penjemputan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Toko"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/nuunito_bold"/>
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="No. HP :"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                android:textSize="12sp"
+                android:fontFamily="@font/nuunito_reguler"/>
+
+            <TextView
+                android:id="@+id/text_nohp_penjemputan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00000"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/nuunito_bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat :"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:fontFamily="@font/nuunito_reguler"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/text_alamat_penjemputan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ALAMAT PENERIMA"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:fontFamily="@font/nuunito_bold"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
