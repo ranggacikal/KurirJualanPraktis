@@ -37,7 +37,10 @@
         android:theme="@style/Theme.KurirJualanPraktis"
         android:usesCleartextTraffic="true"
         tools:replace="android:theme, android:icon">
-        <activity android:name=".DetailPengantaranActivity"></activity>
+        <activity android:name=".PengantaranReturActivity"></activity>
+        <activity android:name=".DetailPenjemputanReturActivity" />
+        <activity android:name=".PenjemputanReturActivity" />
+        <activity android:name=".DetailPengantaranActivity" />
         <activity android:name=".PengantaranActivity" />
         <activity android:name=".DetailPenjemputanActivity" />
         <activity android:name=".PenjemputanActivity" />

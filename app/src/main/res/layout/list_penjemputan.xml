@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="7dp"
-    app:cardElevation="7dp"
     android:layout_margin="7dp"
-    app:cardBackgroundColor="@color/colorPrimaryApp">
+    app:cardBackgroundColor="@color/colorPrimaryApp"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="7dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,53 +17,53 @@
             android:id="@+id/text_nama_toko_penjemputan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama Toko"
-            android:textColor="@color/white"
-            android:textSize="20sp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/nuunito_bold"/>
+            android:fontFamily="@font/nuunito_bold"
+            android:text="Nama Toko"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:text="No. HP :"
-                android:textColor="@color/white"
-                android:layout_marginStart="10dp"
-                android:textSize="12sp"
-                android:fontFamily="@font/nuunito_reguler"/>
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/nuunito_reguler"
+            android:text="No. HP :"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/text_nohp_penjemputan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00000"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/nuunito_bold"/>
+        <TextView
+            android:id="@+id/text_nohp_penjemputan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/nuunito_bold"
+            android:text="00000"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/nuunito_reguler"
             android:text="Alamat :"
             android:textColor="@color/white"
-            android:textSize="12sp"
-            android:fontFamily="@font/nuunito_reguler"
-            android:layout_marginStart="10dp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/text_alamat_penjemputan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ALAMAT PENERIMA"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/nuunito_bold"
+            android:text="ALAMAT PENERIMA"
             android:textColor="@color/white"
-            android:textSize="15sp"
-            android:fontFamily="@font/nuunito_bold"/>
+            android:textSize="15sp" />
 
     </LinearLayout>
 

@@ -59,6 +59,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        cardPenjemputanRetur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PenjemputanReturActivity.class));
+            }
+        });
+
+        cardPengantaranRetur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PengantaranReturActivity.class));
+            }
+        });
+
 
     }
 }
