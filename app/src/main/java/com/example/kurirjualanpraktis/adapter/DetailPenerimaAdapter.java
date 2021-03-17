@@ -49,6 +49,8 @@ public class DetailPenerimaAdapter extends RecyclerView.Adapter<DetailPenerimaAd
         holder.txtOngkos.setText("Rp" + NumberFormat.getInstance().format(Integer.parseInt(item.get("ongkos"))));
         holder.txtGrandTotal.setText("Rp" + NumberFormat.getInstance().format(Integer.parseInt(item.get("grand_total"))));
 
+        holder.lblAlamatVendor.setText("Alamat Penerima");
+
     }
 
     @Override
@@ -59,6 +61,7 @@ public class DetailPenerimaAdapter extends RecyclerView.Adapter<DetailPenerimaAd
     public class DetailPenerimaViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtIdTransaksi, txtNamaPenerima, txtNoHp, txtAlamat, txtTotalBayar, txtOngkos, txtGrandTotal;
+        TextView lblAlamatVendor;
 
         public DetailPenerimaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +72,7 @@ public class DetailPenerimaAdapter extends RecyclerView.Adapter<DetailPenerimaAd
             txtTotalBayar = itemView.findViewById(R.id.text_total_bayar_detail_penerima);
             txtOngkos = itemView.findViewById(R.id.text_ongkos_detail_penerima);
             txtGrandTotal = itemView.findViewById(R.id.text_grand_total_detail_penerima);
+            lblAlamatVendor = itemView.findViewById(R.id.lbl_alamat_vendor);
         }
     }
 }

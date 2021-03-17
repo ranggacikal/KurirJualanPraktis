@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kurirjualanpraktis.DetailPenjemputanActivity;
+import com.example.kurirjualanpraktis.DetailPenjemputanReturActivity;
 import com.example.kurirjualanpraktis.R;
 import com.example.kurirjualanpraktis.sharedPreferences.Pref;
 
@@ -21,11 +22,13 @@ public class DetailPenjemputanReturAdapter extends RecyclerView.Adapter<DetailPe
 
     Context context;
     ArrayList<HashMap<String, String>> listDetailPenjemputanRetur = new ArrayList<>();
+    DetailPenjemputanReturActivity detailPenjemputanReturActivity;
     private Pref pref;
 
-    public DetailPenjemputanReturAdapter(Context context, ArrayList<HashMap<String, String>> listDetailPenjemputanRetur) {
+    public DetailPenjemputanReturAdapter(Context context, ArrayList<HashMap<String, String>> listDetailPenjemputanRetur, DetailPenjemputanReturActivity detailPenjemputanReturActivity) {
         this.context = context;
         this.listDetailPenjemputanRetur = listDetailPenjemputanRetur;
+        this.detailPenjemputanReturActivity = detailPenjemputanReturActivity;
     }
 
     @NonNull
@@ -50,6 +53,9 @@ public class DetailPenjemputanReturAdapter extends RecyclerView.Adapter<DetailPe
         String kota = item.get("kota");
         String provinsi = item.get("provinsi");
         String id_transaksi = item.get("id_transaksi");
+
+        detailPenjemputanReturActivity.id_member = item.get("id_member");
+        detailPenjemputanReturActivity.id_pengiriman = item.get("id_pengiriman");
 
         holder.lblAlamatVendor.setText("Alamat");
         holder.relativeNamaToko.setVisibility(View.GONE);

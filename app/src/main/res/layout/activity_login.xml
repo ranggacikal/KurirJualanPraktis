@@ -84,6 +84,7 @@
             android:fontFamily="@font/nuunito_bold"
             android:gravity="end"
             android:text="Lupa kata sandi?"
+            android:visibility="gone"
             android:textColor="@color/black" />
 
         <Button

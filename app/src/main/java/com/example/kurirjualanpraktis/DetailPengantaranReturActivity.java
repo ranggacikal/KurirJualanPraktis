@@ -6,20 +6,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.kurirjualanpraktis.adapter.DetailPenjemputanReturAdapter;
-import com.example.kurirjualanpraktis.adapter.DetailProdukAdapter;
-import com.example.kurirjualanpraktis.adapter.DetailVendorAdapter;
-import com.example.kurirjualanpraktis.adapter.ProdukPenjemputanReturAdapter;
+import com.example.kurirjualanpraktis.adapter.DetailPenerimaAdapter;
+import com.example.kurirjualanpraktis.adapter.PenerimaDetailPengantaranReturAdapter;
+import com.example.kurirjualanpraktis.adapter.ProdukPengantaranAdapter;
+import com.example.kurirjualanpraktis.adapter.ProdukPengantaranReturAdapter;
 import com.example.kurirjualanpraktis.sharedPreferences.SharedPrefManager;
 import com.example.kurirjualanpraktis.sharedPreferences.loginuser;
 
@@ -34,33 +34,49 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 
-public class DetailPenjemputanReturActivity extends AppCompatActivity {
+public class DetailPengantaranReturActivity extends AppCompatActivity {
 
+    Button btnTerima, btnTolak;
+    RecyclerView recyclerDetailPenerima, recyclerDetailProduk;
     ImageView imgBack;
-    RecyclerView recyclerPenjemputanRetur, recyclerProduk;
-    Button btnUpdate;
 
     loginuser user;
 
-    ArrayList<HashMap<String, String>> dataDetailPenjemputanRetur = new ArrayList<>();
+    LinearLayout linearButton;
+    Button btnUpdate;
 
-    DetailPenjemputanReturActivity detailPenjemputanReturActivity;
+    ArrayList<HashMap<String, String>> dataPengantaranRetur = new ArrayList<>();
 
-    public String id_pengiriman;
+    DetailPengantaranReturActivity detailPengantaranReturActivity;
+
+    public String id_transaksi;
     public String id_member;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_penjemputan_retur);
+        setContentView(R.layout.activity_detail_pengantaran_retur);
 
-        user = SharedPrefManager.getInstance(DetailPenjemputanReturActivity.this).getUser();
-        AndroidNetworking.initialize(DetailPenjemputanReturActivity.this.getApplicationContext());
+        user = SharedPrefManager.getInstance(DetailPengantaranReturActivity.this).getUser();
+        AndroidNetworking.initialize(DetailPengantaranReturActivity.this.getApplicationContext());
 
-        imgBack = findViewById(R.id.img_back_detail_penjemputan_retur);
-        recyclerPenjemputanRetur = findViewById(R.id.recycler_detail_penjemputan_retur);
-        recyclerProduk = findViewById(R.id.recycler_detail_produk_penjemputan_retur);
-        btnUpdate = findViewById(R.id.btn_update_penjemputan_retur);
+        btnTerima = findViewById(R.id.btn_diterima_pengantaran_retur);
+        btnTolak = findViewById(R.id.btn_ditolak_pengantaran_retur);
+        recyclerDetailPenerima = findViewById(R.id.recycler_detail_penerima_pengantaran_retur);
+        recyclerDetailProduk = findViewById(R.id.recycler_detail_produk_pengantaran_retur);
+        imgBack = findViewById(R.id.img_back_detail_pengantaran_retur);
+        linearButton = findViewById(R.id.linear_button_detail_pengantaran_retur);
+        btnUpdate = findViewById(R.id.btn_update_pengantaran_retur);
+
+        linearButton.setVisibility(View.GONE);
+        btnUpdate.setVisibility(View.VISIBLE);
+
+        recyclerDetailPenerima.setHasFixedSize(true);
+        recyclerDetailPenerima.setLayoutManager(new LinearLayoutManager(DetailPengantaranReturActivity.this));
+
+        recyclerDetailProduk.setHasFixedSize(true);
+        recyclerDetailProduk.setLayoutManager(new LinearLayoutManager(DetailPengantaranReturActivity.this));
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,27 +85,21 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
             }
         });
 
-        recyclerPenjemputanRetur.setHasFixedSize(true);
-        recyclerProduk.setHasFixedSize(true);
-
-        recyclerPenjemputanRetur.setLayoutManager(new LinearLayoutManager(DetailPenjemputanReturActivity.this));
-        recyclerProduk.setLayoutManager(new LinearLayoutManager(DetailPenjemputanReturActivity.this));
-
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updatePenjemputanRetur();
+                updatePengantaranRetur();
             }
         });
 
-        loadDetailPenjemputanRetur();
+        loadDetailPengantaranRetur();
     }
 
-    private void updatePenjemputanRetur() {
+    private void updatePengantaranRetur() {
 
-        String host = "https://jualanpraktis.net/android/kurir/update-penjemputan-retur.php";
+        String host = "https://jualanpraktis.net/android/kurir/update-pengantaran-retur.php";
 
-        ProgressDialog progressDialog = new ProgressDialog(DetailPenjemputanReturActivity.this);
+        ProgressDialog progressDialog = new ProgressDialog(DetailPengantaranReturActivity.this);
         progressDialog.setTitle("Loading");
         progressDialog.setMessage("Update Status Penjemputan");
         progressDialog.setCancelable(false);
@@ -97,8 +107,8 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
 
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("id_pengiriman", id_pengiriman);
-        params.put("id_transaksi", getIntent().getStringExtra("id_transaksi"));
+        params.put("id_pengiriman", getIntent().getStringExtra("id_pengiriman"));
+        params.put("id_transaksi", id_transaksi);
         params.put("id_member", id_member);
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
@@ -108,7 +118,7 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                 .build();
         AndroidNetworking.post(host)
                 .addBodyParameter(params)
-                .setTag(DetailPenjemputanReturActivity.this)
+                .setTag(DetailPengantaranReturActivity.this)
                 .setPriority(Priority.MEDIUM)
                 .setOkHttpClient(okHttpClient)
                 .build()
@@ -116,7 +126,7 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         progressDialog.dismiss();
-                        Toast.makeText(DetailPenjemputanReturActivity.this, "Berhasil Update Status Penjemputan Retur", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailPengantaranReturActivity.this, "Berhasil Update Status Pengantaran retur", Toast.LENGTH_SHORT).show();
                         finish();
 
 
@@ -132,21 +142,21 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError anError) {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Gagal Update Status Penjemputan Retur", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Gagal Update Status Pengantaran Retur", Toast.LENGTH_SHORT).show();
                     }
 
                 });
 
     }
 
-    private void loadDetailPenjemputanRetur() {
+    private void loadDetailPengantaranRetur() {
 
-        ProgressDialog progressDialog = new ProgressDialog(DetailPenjemputanReturActivity.this);
+        ProgressDialog progressDialog = new ProgressDialog(DetailPengantaranReturActivity.this);
         progressDialog.setTitle("Memuat Data");
         progressDialog.setMessage("Loading..");
         progressDialog.show();
 
-        String url = "https://jualanpraktis.net/android/kurir/detail-penjemputan-retur.php";
+        String url = "https://jualanpraktis.net/android/kurir/detail-pengantaran-retur.php";
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)
@@ -155,8 +165,8 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                 .build();
 
         AndroidNetworking.post(url)
-                .addBodyParameter("idtrx", getIntent().getStringExtra("id_transaksi"))
-                .setTag(DetailPenjemputanReturActivity.this)
+                .addBodyParameter("id_pengiriman", getIntent().getStringExtra("id_pengiriman"))
+                .setTag(DetailPengantaranReturActivity.this)
                 .setPriority(Priority.MEDIUM)
                 .setOkHttpClient(okHttpClient)
                 .build()
@@ -165,24 +175,24 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         progressDialog.dismiss();
-                        dataDetailPenjemputanRetur.clear();
+                        dataPengantaranRetur.clear();
                         try {
                             JSONArray array = response.getJSONArray("data");
                             for (int i = 0;i<array.length();i++){
                                 JSONObject jsonObject = array.getJSONObject(i);
                                 HashMap<String,String> data = new HashMap<>();
                                 data.put("id_pengiriman",jsonObject.getString("id_pengiriman"));
+                                data.put("id_customer",jsonObject.getString("id_customer"));
                                 data.put("id_member",jsonObject.getString("id_member"));
                                 data.put("id_transaksi",jsonObject.getString("id_transaksi"));
-                                data.put("nama_penerima",jsonObject.getString("nama_penerima"));
+                                data.put("nama_penerima",jsonObject.getString("nama"));
                                 data.put("provinsi",jsonObject.getString("province"));
                                 data.put("kota",jsonObject.getString("city_name"));
                                 data.put("kecamatan",jsonObject.getString("subdistrict_name"));
+                                data.put("kelurahan",jsonObject.getString("kelurahan"));
                                 data.put("alamat",jsonObject.getString("alamat"));
                                 data.put("no_hp",jsonObject.getString("no_hp"));
-                                data.put("ongkos",jsonObject.getString("ongkos"));
-                                data.put("total_bayar",jsonObject.getString("total_bayar"));
-                                data.put("grand_total",jsonObject.getString("grand_total"));
+                                data.put("nama_toko",jsonObject.getString("nama_company"));
 
 
 
@@ -195,15 +205,15 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                                     data.put("jumlah", jsonObject1.getString("jumlah"));
                                 }
 
-                                dataDetailPenjemputanRetur.add(data);
+                                dataPengantaranRetur.add(data);
                             }
 
-                            DetailPenjemputanReturAdapter adapterDetail = new DetailPenjemputanReturAdapter(DetailPenjemputanReturActivity.this, dataDetailPenjemputanRetur, DetailPenjemputanReturActivity.this);
-                            recyclerPenjemputanRetur.setAdapter(adapterDetail);
+                            //set aapter
+                            PenerimaDetailPengantaranReturAdapter adapterPenerima = new PenerimaDetailPengantaranReturAdapter(DetailPengantaranReturActivity.this, dataPengantaranRetur, DetailPengantaranReturActivity.this);
+                            recyclerDetailPenerima.setAdapter(adapterPenerima);
 
-                            ProdukPenjemputanReturAdapter adapterProduk = new ProdukPenjemputanReturAdapter(DetailPenjemputanReturActivity.this, dataDetailPenjemputanRetur);
-                            recyclerProduk.setAdapter(adapterProduk);
-
+                            ProdukPengantaranReturAdapter adapterProduk = new ProdukPengantaranReturAdapter(DetailPengantaranReturActivity.this, dataPengantaranRetur);
+                            recyclerDetailProduk.setAdapter(adapterProduk);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -213,7 +223,7 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError anError) {
                         progressDialog.dismiss();
-                        dataDetailPenjemputanRetur.clear();
+                        dataPengantaranRetur.clear();
 
                         if (anError.getErrorCode() != 0) {
                             // received error from server
@@ -222,13 +232,13 @@ public class DetailPenjemputanReturActivity extends AppCompatActivity {
                             // error.getErrorDetail() - just an error detail
 
                             // get parsed error object (If ApiError is your class)
-                            Toast.makeText(DetailPenjemputanReturActivity.this, "Gagal mendapatkan data.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DetailPengantaranReturActivity.this, "Gagal mendapatkan data.", Toast.LENGTH_SHORT).show();
                         } else {
                             // error.getErrorDetail() : connectionError, parseError, requestCancelledError
                             if (anError.getErrorDetail().equals("connectionError")){
-                                Toast.makeText(DetailPenjemputanReturActivity.this, "Tidak ada koneksi internet.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DetailPengantaranReturActivity.this, "Tidak ada koneksi internet.", Toast.LENGTH_SHORT).show();
                             }else {
-                                Toast.makeText(DetailPenjemputanReturActivity.this, "Gagal mendapatkan data.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DetailPengantaranReturActivity.this, "Gagal mendapatkan data.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

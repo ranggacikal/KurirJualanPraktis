@@ -1,6 +1,7 @@
 package com.example.kurirjualanpraktis.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kurirjualanpraktis.DetailPengantaranReturActivity;
 import com.example.kurirjualanpraktis.R;
 import com.example.kurirjualanpraktis.sharedPreferences.Pref;
 
@@ -48,10 +50,20 @@ public class PengantaranReturAdapter extends RecyclerView.Adapter<PengantaranRet
         String kota = item.get("kota");
         String provinsi = item.get("provinsi");
         String id_transaksi = item.get("id_transaksi");
+        String id_pengiriman = item.get("id_pengiriman");
 
         holder.txtNamaToko.setText(nama_penerima);
         holder.txtNoHp.setText(no_hp);
         holder.txtAlamat.setText(alamat+", "+kelurahan+", "+kecamatan+", "+kota+", "+provinsi);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailPengantaranReturActivity.class);
+                intent.putExtra("id_pengiriman", id_pengiriman);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
